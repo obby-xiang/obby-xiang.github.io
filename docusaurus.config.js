@@ -29,8 +29,8 @@ const config = {
   // metadata like html lang. For example, if your site is Chinese, you may want
   // to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: 'zh-Hans',
+    locales: ['zh-Hans'],
   },
 
   presets: [
@@ -42,10 +42,12 @@ const config = {
         blog: {
           routeBasePath: '/',
           showReadingTime: true,
+          blogSidebarCount: 'ALL',
+          blogSidebarTitle: '所有博文',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          editUrl: ({blogDirPath, blogPath}) =>
+              `https://github.com/obby-xiang/obby-xiang.github.io/edit/master/${blogDirPath}/${blogPath}`,
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -65,6 +67,16 @@ const config = {
           src: 'img/logo.svg',
         },
         items: [
+          {
+            to: '/tags',
+            label: '标签',
+            position: 'left',
+          },
+          {
+            to: '/archive',
+            label: '归档',
+            position: 'left',
+          },
           {
             href: 'https://github.com/obby-xiang/obby-xiang.github.io',
             label: 'GitHub',
