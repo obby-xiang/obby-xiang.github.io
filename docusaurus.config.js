@@ -50,7 +50,7 @@ const config = {
               `https://github.com/obby-xiang/obby-xiang.github.io/edit/master/${blogDirPath}/${blogPath}`,
         },
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: require.resolve('./src/css/custom.scss'),
         },
       }),
     ],
@@ -93,6 +93,8 @@ const config = {
         darkTheme: darkCodeTheme,
       },
     }),
+
+  plugins: ['docusaurus-plugin-sass'],
 };
 
 module.exports = config;
