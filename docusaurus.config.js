@@ -54,19 +54,6 @@ const config = {
         },
       }),
     ],
-    [
-      '@docusaurus/plugin-google-gtag',
-      {
-        trackingID: 'G-25M8JEN1TJ',
-        anonymizeIP: true,
-      },
-    ],
-    [
-      '@docusaurus/plugin-google-tag-manager',
-      {
-        containerId: 'GTM-NJ6HC823',
-      },
-    ],
   ],
 
   themeConfig:
@@ -107,7 +94,21 @@ const config = {
       },
     }),
 
-  plugins: ['docusaurus-plugin-sass'],
+  plugins: [
+    'docusaurus-plugin-sass',
+    [
+      '@docusaurus/plugin-google-gtag',
+      {
+        trackingID: 'G-25M8JEN1TJ',
+      },
+    ],
+    [
+      '@docusaurus/plugin-google-tag-manager',
+      {
+        containerId: 'GTM-NJ6HC823',
+      },
+    ],
+  ],
 };
 
 module.exports = config;
