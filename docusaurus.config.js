@@ -92,6 +92,12 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
+      algolia: {
+        appId: '6PGH82GV9N',
+        apiKey: '1a232f947626a47b2594b7b95b45bf4d',
+        indexName: 'obby-xiangio',
+        contextualSearch: true,
+      },
     }),
 
   plugins: [
