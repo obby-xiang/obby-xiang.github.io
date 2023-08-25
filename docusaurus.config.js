@@ -86,7 +86,7 @@ const config = {
       },
       footer: {
         style: 'dark',
-        copyright: `Copyright © ${new Date().getFullYear()} obby-xiang.`,
+        copyright: `Copyright © ${new Date().getFullYear()} obby-xiang. Built with Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,
