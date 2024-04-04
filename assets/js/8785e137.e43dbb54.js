@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkobby_xiang_github_io=self.webpackChunkobby_xiang_github_io||[]).push([[40],{3155:a=>{a.exports=JSON.parse('{"label":"Gerrit","permalink":"/tags/gerrit","allTagsPath":"/tags","count":1}')}}]);

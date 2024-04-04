@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkobby_xiang_github_io=self.webpackChunkobby_xiang_github_io||[]).push([[964],{8866:e=>{e.exports=JSON.parse('[{"label":"Gerrit","permalink":"/tags/gerrit","count":1},{"label":"hello-world","permalink":"/tags/hello-world","count":1}]')}}]);

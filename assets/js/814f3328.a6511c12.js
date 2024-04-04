@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkobby_xiang_github_io=self.webpackChunkobby_xiang_github_io||[]).push([[535],{5641:i=>{i.exports=JSON.parse('{"title":"\u6240\u6709\u535a\u6587","items":[{"title":"\u5728 Windows \u4e0a\u5b89\u88c5 Gerrit","permalink":"/installing-gerrit-on-windows"},{"title":"Hello World","permalink":"/hello-world"}]}')}}]);
