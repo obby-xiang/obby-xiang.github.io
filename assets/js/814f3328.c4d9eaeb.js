@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkobby_xiang_github_io=self.webpackChunkobby_xiang_github_io||[]).push([[535],{5641:e=>{e.exports=JSON.parse('{"title":"\u6240\u6709\u535a\u6587","items":[{"title":"Hello World","permalink":"/hello-world"}]}')}}]);
