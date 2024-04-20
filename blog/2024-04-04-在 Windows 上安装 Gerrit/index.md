@@ -1,5 +1,5 @@
 ---
-slug: installing-gerrit-on-windows
+slug: install-gerrit-on-windows
 title: 在 Windows 上安装 Gerrit
 authors: obby-xiang
 tags: [Gerrit]
@@ -43,7 +43,7 @@ java -jar gerrit.war init -d <gerrit_application_directory>
 
 ## 启动守护进程
 
-``` shell
+```shell
 cd <gerrit_application_directory>
 java -jar bin\gerrit.war daemon --console-log
 ```
@@ -54,17 +54,17 @@ java -jar bin\gerrit.war daemon --console-log
 
 打开浏览器访问站点。
 
-![gerrit](files/gerrit.png)
+![gerrit](assets/gerrit.png)
 
 
 
 创建存储库。
 
-![entrance-create-new-repository](files/entrance-create-new-repository.png)
+![entrance-create-new-repository](assets/entrance-create-new-repository.png)
 
-![create-new-repository](files/create-new-repository.png)
+![create-new-repository](assets/create-new-repository.png)
 
-![new-repository](files/new-repository.png)
+![new-repository](assets/new-repository.png)
 
 
 
