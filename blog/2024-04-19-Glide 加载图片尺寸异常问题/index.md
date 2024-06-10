@@ -64,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
-> - 测试设备：Android 11，1080×2400
-> - 测试图片：[6000×1000](assets/test-image.png)
+> - 测试设备：Android 11，1080x2400
+> - 测试图片：[6000x1000](assets/test-image.png)
 
 使用测试图片尝试复现问题，却发现图片是可以正常加载的。退出应用终止进程后再次启动应用查看测试图片，神奇的事情发生了——图片加载不出来了，问题日志跟刚开始提到的一模一样。
 
@@ -91,7 +91,7 @@ protected void throwIfCannotDraw(Bitmap bitmap) {
 }
 ```
 
-`ImageView` 绘制的位图超过了 100 MB 的大小限制，抛出了运行时异常。测试图片大小是 6000×1000，如果使用 `ARGB_8888` 配置加载，位图大小不到 23 MB（6000×1000×4 字节）。在加载图片的时候还使用了 [`FitCenter`](https://github.com/bumptech/glide/blob/v4.16.0/library/src/main/java/com/bumptech/glide/load/resource/bitmap/FitCenter.java) 变换，最终绘制的位图大小应该是 1080×180，不到 1 MB（1080×180×4 字节）。
+`ImageView` 绘制的位图超过了 100 MB 的大小限制，抛出了运行时异常。测试图片大小是 6000x1000，如果使用 `ARGB_8888` 配置加载，位图大小不到 23 MB（6000x1000x4 字节）。在加载图片的时候还使用了 [`FitCenter`](https://github.com/bumptech/glide/blob/v4.16.0/library/src/main/java/com/bumptech/glide/load/resource/bitmap/FitCenter.java) 变换，最终绘制的位图大小应该是 1080x180，不到 1 MB（1080x180x4 字节）。
 
 使用图片加载请求监听器，加载完成时打印图片信息日志：
 
@@ -230,7 +230,7 @@ TransformationUtils: minPct:   0.075
 title: 从原始资源加载图片
 ---
 flowchart LR
-    original["原始资源 6000×1000"] -- 解码 --> decoded["位图 14400x2400"] -- 变换 --> transformed["位图 1080x180"]
+    original["原始资源 6000x1000"] -- 解码 --> decoded["位图 14400x2400"] -- 变换 --> transformed["位图 1080x180"]
 ```
 
 从磁盘缓存加载图片无相关日志打印，此时加载的是前面缓存的变换后的图片。查找 [`Transformation#transform`](https://github.com/bumptech/glide/blob/v4.16.0/library/src/main/java/com/bumptech/glide/load/Transformation.java#L65) 的调用，可以在 [`DecodeJob#onResourceDecoded`](https://github.com/bumptech/glide/blob/v4.16.0/library/src/main/java/com/bumptech/glide/load/engine/DecodeJob.java#L571) 找到答案：
