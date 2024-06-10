@@ -93,7 +93,7 @@ const config = {
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
-        additionalLanguages: ['bash', 'java'],
+        additionalLanguages: ['bash', 'java', 'log'],
       },
       algolia: {
         appId: '6PGH82GV9N',
@@ -118,6 +118,11 @@ const config = {
       },
     ],
   ],
+
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
 };
 
 export default config;
