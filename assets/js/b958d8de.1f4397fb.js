@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkobby_xiang_github_io=self.webpackChunkobby_xiang_github_io||[]).push([[702],{1292:l=>{l.exports=JSON.parse('{"label":"hello-world","permalink":"/tags/hello-world","allTagsPath":"/tags","count":1,"unlisted":false}')}}]);
