@@ -2,7 +2,7 @@
 slug: install-gerrit-on-windows
 title: 在 Windows 上安装 Gerrit
 authors: obby-xiang
-tags: [Gerrit]
+tags: [Gerrit, Windows]
 ---
 
 

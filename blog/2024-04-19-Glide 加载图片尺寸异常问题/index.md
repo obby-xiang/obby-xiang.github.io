@@ -2,7 +2,7 @@
 slug: glide-abnormal-image-size
 title: Glide 加载图片尺寸异常问题
 authors: obby-xiang
-tags: [Glide]
+tags: [Glide, Android]
 ---
 
 
