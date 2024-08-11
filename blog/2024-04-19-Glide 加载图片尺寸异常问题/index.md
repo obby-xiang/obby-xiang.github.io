@@ -32,6 +32,15 @@ java.lang.RuntimeException: Canvas: trying to draw too large(138240000bytes) bit
 代码大致如下：
 
 ```java title="MainActivity.java"
+import android.os.Bundle;
+import android.widget.ImageView;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.FitCenter;
+
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +105,21 @@ protected void throwIfCannotDraw(Bitmap bitmap) {
 使用图片加载请求监听器，加载完成时打印图片信息日志：
 
 ```java
+// highlight-start
+import android.graphics.Bitmap;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
+// highlight-end
+
+...
+
 Glide.with(imageView)
     .asBitmap()
     .load(R.drawable.image)
@@ -768,6 +792,11 @@ private static class FitCenter extends DownsampleStrategy {
 ```
 
 ```java
+// highlight-next-line
+import com.bumptech.glide.load.resource.bitmap.DownsampleStrategy;
+
+...
+
 Glide.with(imageView)
     .asBitmap()
     .load(R.drawable.image)
