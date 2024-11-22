@@ -3,7 +3,6 @@ slug: build-android-with-github-actions
 title: 使用 GitHub Actions 构建 Android 应用
 authors: obby-xiang
 tags: [Github, Android]
-draft: true
 ---
 
 
@@ -23,7 +22,6 @@ draft: true
 ```yaml title="build.yml"
 name: Android Build
 
-# 推送到 master 分支时运行工作流程
 on:
   push:
     branches:
@@ -44,7 +42,6 @@ jobs:
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-
       - name: Build with Gradle
         run: ./gradlew build
 ```
@@ -56,7 +53,6 @@ jobs:
 ```yaml title="build.yml"
 name: Android Build
 
-# 推送到 master 分支时运行工作流程
 on:
   push:
     branches:
@@ -77,7 +73,6 @@ jobs:
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-
       - name: Build with Gradle
         run: ./gradlew build
 
@@ -86,7 +81,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build-artifact
-          path: app/build/outputs/apk/release/app-release-unsigned.apk
+          path: app/build/outputs/
       # highlight-end
 ```
 
@@ -185,7 +180,68 @@ android {
 signing.properties
 ```
 
-todo...
+使用 Github Actions 构建应用，密钥库密码、密钥名称和密钥密码可以作为机密配置到组织、存储库或存储库环境，密钥库文件怎么配置呢？
+
+可以使用 Base64 编码将密钥库文件存储为机密，然后在工作流程中引用该机密，并对其进行解码以在运行器上使用。
+
+```shell
+base64 -w 0 example.jks > example.jks.base64
+```
+
+在工作流文件中构建应用命令使用签名信息，这样构建的 Android 应用包就能安装到设备上。
+
+```yaml title="build.yml"
+name: Android Build
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Build Android
+    env:
+      SIGNING_STORE_FILE: "${{ github.workspace }}/keystore.jks"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: set up JDK 11
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: gradle
+
+      # highlight-start
+      - name: Create Keystore File
+        env:
+          SIGNING_STORE_BASE64: ${{ secrets.SIGNING_STORE_BASE64 }}
+        run: |
+          echo "$SIGNING_STORE_BASE64" | base64 --decode > "$SIGNING_STORE_FILE"
+      # highlight-end
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Build with Gradle
+        # highlight-start
+        env:
+          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+        run: |
+          ./gradlew build -Psigning.storeFile="$SIGNING_STORE_FILE" \
+            -Psigning.storePassword="$SIGNING_STORE_PASSWORD" \
+            -Psigning.keyAlias="$SIGNING_KEY_ALIAS" \
+            -Psigning.keyPassword="$SIGNING_KEY_PASSWORD"
+        # highlight-end
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifact
+          path: app/build/outputs/
+```
 
 
 
@@ -194,6 +250,7 @@ todo...
 - [GitHub Actions 快速入门 - GitHub 文档](https://docs.github.com/zh/actions/writing-workflows/quickstart)
 - [从工作流存储和共享数据 - GitHub 文档](https://docs.github.com/zh/actions/writing-workflows/choosing-what-your-workflow-does/storing-and-sharing-data-from-a-workflow)
 - [在变量中存储信息 - GitHub 文档](https://docs.github.com/zh/actions/writing-workflows/choosing-what-your-workflow-does/store-information-in-variables)
+- [访问有关工作流运行的上下文信息 - GitHub 文档](https://docs.github.com/zh/actions/writing-workflows/choosing-what-your-workflow-does/accessing-contextual-information-about-workflow-runs)
 - [在 GitHub Actions 中使用机密 - GitHub 文档](https://docs.github.com/zh/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions)
 - [actions/starter-workflows: Accelerating new GitHub Actions workflows - Github](https://github.com/actions/starter-workflows)
 - [actions/setup-java: Set up your GitHub Actions workflow with a specific version of Java - Github](https://github.com/actions/setup-java)
